@@ -1,0 +1,100 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color:  #0A294E;
+}
+
+  .loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
+  
+  .app-name {
+    font-size: 75px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .powered-by {
+    
+    font-size: 14px;
+    color: #888;
+  
+  
+  color: #888;
+}
+
+.loader-container {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loader {
+  width: 70px;
+  height: 70px;
+  border: 8px solid #006aba;
+  border-top: 8px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: relative;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    border-width: 8px;
+    border-color: #006aba;
+  }
+  25% {
+    border-width: 14px;
+    border-color: #1f9cff;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+    border-width: 8px;
+    border-color: #2577eb;
+  }
+  75% {
+    border-width: 14px;
+    border-color: #026ea0;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    border-width: 8px;
+    border-color: #0289f0;
+  }
+}
+
+.report-form-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+/* Media query for screens with a maximum width of 768px */
+@media screen and (max-width: 768px) {
+  .app-name {
+    font-size: 45px;
+  }
+  .powered-by {
+    font-size: 12px;
+  }
+}
+

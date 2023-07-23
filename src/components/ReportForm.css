@@ -1,0 +1,106 @@
+.report-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)),
+    url("https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+  /* Add background overflow */
+}
+
+.report-form {
+  background-color: white;
+  padding: 20px 60px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.report-form-heading {
+  color: rgb(77, 1, 77);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.report-form-input {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  padding-top: 10px;
+  /* Add desired padding-top value */
+  padding-bottom: 10px;
+  /* Add desired padding-bottom value */
+}
+
+.report-form-input input,select {
+  padding: 15px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.report-form-input label {
+  font-size: 12px;
+  color: gray;
+}
+
+.report-form-input span {
+  font-size: 12px;
+  padding: 3px;
+  color: red;
+  display: none;
+}
+
+.report-form-input input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+.report-form-input input:invalid[focused="true"]~span {
+  display: block;
+}
+
+.report-form-button {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  background-color: rebeccapurple;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+input,textarea {
+  padding: 15px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+select{
+  height: 40px;
+  
+}
+label {
+  font-size: 14px;
+  color: gray;
+}
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .report-form-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+  
+  
+  
+  .report-form-input, .report-form-button {
+    font-size: 14px;
+  }
+}
