@@ -17,6 +17,7 @@ const projectId = process.env.REACT_APP_INFURA_PROJECT_ID
 const projectSecretKey = process.env.REACT_APP_INFURA_API_KEY
 const authorization = "Basic " + btoa(projectId + ":" + projectSecretKey);
 const ReportForm = () => {
+  // eslint-disable-next-line no-unused-vars
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState([]);
