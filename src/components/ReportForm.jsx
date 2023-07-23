@@ -56,7 +56,7 @@ const ReportForm = () => {
     };
 
     initializeWeb3();
-  }, []);
+  }, [web3]);
 
   const encryptData = (data) => {
     const encryptedData = AES.encrypt(data, encryptionKey).toString();
