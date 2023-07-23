@@ -8,17 +8,16 @@ import { create as ipfsHttpClient } from 'ipfs-http-client';
 const encryptionKey = process.env.REACT_APP_ENCRYPTION_KEY;
 const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 const districtOptions = [
-  // District options here
   'Alappuzha', 'Ernakulam', 'Idukki', 'Kannur', 'Kasaragod',
   'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
   'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
 ];
-const projectId = process.env.REACT_APP_INFURA_PROJECT_ID
-const projectSecretKey = process.env.REACT_APP_INFURA_API_KEY
+const projectId = process.env.REACT_APP_INFURA_PROJECT_ID;
+const projectSecretKey = process.env.REACT_APP_INFURA_API_KEY;
 const authorization = "Basic " + btoa(projectId + ":" + projectSecretKey);
+
 const ReportForm = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [web3, setWeb3] = useState(null);
+ 
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [district, setDistrict] = useState('');
@@ -28,25 +27,23 @@ const ReportForm = () => {
   const [photo, setPhoto] = useState([]);
   const [video, setVideo] = useState([]);
 
-  // New state variables for IPFS upload
   const [uploading, setUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
- 
 
   useEffect(() => {
     const initializeWeb3 = async () => {
       if (window.ethereum) {
-        const web3Instance = new Web3(window.ethereum);
-        setWeb3(web3Instance);
-
-        const contractInstance = new web3Instance.eth.Contract(contractABI, contractAddress);
-        setContract(contractInstance);
-
         try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const web3Instance = new Web3(window.ethereum);
+          
+
+          const contractInstance = new web3Instance.eth.Contract(contractABI, contractAddress);
+          setContract(contractInstance);
+
           const accounts = await web3Instance.eth.getAccounts();
           setAccounts(accounts);
 
-          // Add event listener for report submitted event
           contractInstance.events.ReportSubmitted((error, event) => {
             if (error) {
               console.error('Error processing event:', error);
@@ -75,50 +72,48 @@ const ReportForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const submitter = accounts[0];
-  
+
       setUploading(true);
       setUploadSuccess(false);
-  
-      // IPFS client setup using Infura
+
       const ipfs = ipfsHttpClient({
         url: "https://ipfs.infura.io:5001/api/v0",
         headers: {
           authorization
         }
       });
-  
-      // Upload photo and video files to IPFS using Infura
+
       let photoHash = null;
       let videoHash = null;
-  
+
       if (photo) {
         const photoUpload = await ipfs.add(photo);
-        photoHash = "https://crs.infura-ipfs.io/ipfs/"+photoUpload.cid.toString();
+        photoHash = "https://crs.infura-ipfs.io/ipfs/" + photoUpload.cid.toString();
         console.log(photoHash);
       }
-  
+
       if (video) {
         const videoUpload = await ipfs.add(video);
-        videoHash = "https://crs.infura-ipfs.io/ipfs/"+videoUpload.cid.toString();
+        videoHash = "https://crs.infura-ipfs.io/ipfs/" + videoUpload.cid.toString();
       }
-  
+
       setUploading(false);
       setUploadSuccess(true);
-  
+
       await contract.methods
         .submitReport(
           encryptData(district),
           encryptData(exciseZone),
           encryptData(title),
           encryptData(description),
-          encryptData(photoHash ), // Use the uploaded hash if available, else use placeholder
-          encryptData(videoHash )  // Use the uploaded hash if available, else use placeholder
+          encryptData(photoHash),
+          encryptData(videoHash)
         )
         .send({ from: submitter });
-  
+
       setDistrict('');
       setExciseZone('');
       setTitle('');
@@ -126,14 +121,13 @@ const ReportForm = () => {
       setPhoto([]);
       setVideo([]);
       setUploadSuccess(false);
-  
+
       alert('Report submitted successfully!');
     } catch (error) {
       console.error('Error submitting report:', error);
       alert('An error occurred while submitting the report. Please try again.');
     }
   };
-  
 
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
@@ -218,12 +212,8 @@ const ReportForm = () => {
             />
           </label>
         </div>
-        {/* Show uploading status */}
         {uploading && <p>Uploading...</p>}
-
-        {/* Show upload success with tick mark */}
         {uploadSuccess && <p>Upload Successful &#10003;</p>}
-
         <button type="submit" className="report-form-button">
           Submit Report
         </button>
