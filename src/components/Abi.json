@@ -167,6 +167,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "getAddressesWithAccess",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "getAllReportIds",
 		"outputs": [
 			{
@@ -230,14 +243,8 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_day",
-				"type": "string"
-			}
-		],
-		"name": "getTotalReportsForDay",
+		"inputs": [],
+		"name": "getTotalContractsDeployed",
 		"outputs": [
 			{
 				"internalType": "uint256",
