@@ -230,8 +230,14 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "getTotalContractsDeployed",
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_day",
+				"type": "string"
+			}
+		],
+		"name": "getTotalReportsForDay",
 		"outputs": [
 			{
 				"internalType": "uint256",

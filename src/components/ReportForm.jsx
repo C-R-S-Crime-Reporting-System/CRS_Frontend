@@ -4,7 +4,7 @@ import './ReportForm.css';
 import { AES } from 'crypto-js';
 import contractABI from './Abi.json';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
-
+// eslint-disable-next-line
 const encryptionKey = process.env.REACT_APP_ENCRYPTION_KEY;
 const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 const districtOptions = [
